@@ -1,0 +1,66 @@
+﻿@model Networking_Project.Models.OrdersTbl
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Payment</h4>
+    <hr />
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumberCard, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NumberCard, new { htmlAttributes = new { @class = "form-control" } })
+            @ViewBag.ErrorMessage
+            @Html.ValidationMessageFor(model => model.NumberCard, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Validity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Validity, new { htmlAttributes = new { @class = "form-control" } })
+            @ViewBag.ErrorMessage
+            @Html.ValidationMessageFor(model => model.Validity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.validation, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.validation, new { htmlAttributes = new { @class = "form-control" } })
+            @ViewBag.ErrorMessage
+            @Html.ValidationMessageFor(model => model.validation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+

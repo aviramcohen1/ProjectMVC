@@ -1,0 +1,134 @@
+﻿@*@model Networking_Project.Models.MoviesTbl*@
+@model PagedList.IPagedList<Networking_Project.Models.MoviesTbl>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+@using (Html.BeginForm("Index", "Users", FormMethod.Get))
+
+{
+    <p>
+        @Html.ActionLink("My Shoping Cart", "MyOrders", new { id = Session["idUser"] })
+    </p>
+    <p>
+        Search by Category:
+
+        <br /><br />@Html.TextBox("SearchCategory", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+    <br />
+    <p>
+        Search by Ticket Price:<br /><br />
+        Min price:@Html.TextBox("SearchPriceR1", Convert.ToInt32(ViewBag.cF1 as string))
+        Max price:@Html.TextBox("SearchPriceR2", Convert.ToInt32(ViewBag.cF2 as string))
+        <input type="submit" value="Search" />
+    </p>
+    <br />
+    <p>
+        Search by Time Range:<br /><br />
+        Start Time:@Html.TextBox("SearchDateR1", (ViewBag.cF3 as string), new { type = "datetime-local" })
+        End Time:@Html.TextBox("SearchDateR2", (ViewBag.cF4 as string), new { type = "datetime-local" })
+
+        <input type="submit" value="Search" />
+    </p>
+    <br />
+    <br />
+    @Html.ActionLink("Reset search", "Index")
+    <br />
+}
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Start Time", "Index")
+        </th>
+        <th>
+            @Html.ActionLink("End Time", "Index")
+        </th>
+        <th>
+            @Html.ActionLink("Hall", "Index")
+        </th>
+        <th>
+            @Html.ActionLink("Number Seats", "Index")
+        </th>
+        <th>
+            @Html.ActionLink("TicketPrice", "Index", new { sortOrder = ViewBag.TicketPriceSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Age Min", "Index")
+        </th>
+        <th>
+            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Rank", "Index", new { sortOrder = ViewBag.RankSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Poster", "Index")
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hall)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberSeats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgeMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rank)
+            </td>
+            <td>
+                <img src="/Admin/RetrieveImage/@item.idScreen" alt="" height=100 width=200 />
+            </td>
+
+
+            <td>
+
+                @Html.ActionLink("Book A Seat", "Order", "Users", new { id = item.idScreen, iduser = Session["idUser"] }, null)
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<a href="@Url.Action("Logout","Home")" class="btn btn-warning">Logout</a>
+
+<br />
+Page @(Model.PageCount< Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DATABASEModelStoreContainer" CdmEntityContainer="DATABASEEntities">
+    <EntitySetMapping Name="MoviesTbl">
+      <EntityTypeMapping TypeName="DATABASEModel.MoviesTbl">
+        <MappingFragment StoreEntitySet="MoviesTbl">
+          <ScalarProperty Name="idScreen" ColumnName="idScreen" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Hall" ColumnName="Hall" />
+          <ScalarProperty Name="NumberSeats" ColumnName="NumberSeats" />
+          <ScalarProperty Name="TicketPrice" ColumnName="TicketPrice" />
+          <ScalarProperty Name="AgeMin" ColumnName="AgeMin" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="Poster" ColumnName="Poster" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdersTbl">
+      <EntityTypeMapping TypeName="DATABASEModel.OrdersTbl">
+        <MappingFragment StoreEntitySet="OrdersTbl">
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idScreen" ColumnName="idScreen" />
+          <ScalarProperty Name="Chair" ColumnName="Chair" />
+          <ScalarProperty Name="Pay" ColumnName="Pay" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersTbl">
+      <EntityTypeMapping TypeName="DATABASEModel.UsersTbl">
+        <MappingFragment StoreEntitySet="UsersTbl">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,50 @@
+﻿
+@model System.Data.DataTable
+@{
+    ViewBag.Title = "MyOrders";
+}
+
+<h2>My Orders</h2>
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <th>Name </th>
+        <th></th>
+        <th>Start Time </th>
+        <th></th>
+        <th>End Time </th>
+        <th></th>
+        <th>Hall </th>
+        <th></th>
+        <th>Number Seats </th>
+        <th></th>
+        <th>Chair </th>
+        <th></th>
+        <th>Ticket Price </th>
+        <th></th>
+        <th>Status Buy</th>
+    </tr>
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+<tr>
+    <td>@Model.Rows[i][2]</td>
+    <td></td>
+    <td>@Model.Rows[i][3]</td>
+    <td></td>
+    <td>@Model.Rows[i][4]</td>
+    <td></td>
+    <td>@Model.Rows[i][5]</td>
+    <td></td>
+    <td>@Model.Rows[i][6]</td>
+    <td></td>
+    <td>@Model.Rows[i][7]</td>
+    <td></td>
+    <td>@Model.Rows[i][8]</td>
+    <td></td>
+    <td>@Model.Rows[i][9]</td>
+    <td></td>
+    <td>@Html.ActionLink("Buy Ticket", "PayMent", "Users", new { id = @Model.Rows[i][0] }, null)</td>
+    <td></td>
+    <td>@Html.ActionLink("Change Place", "editOrder", "Users", new { idorder = @Model.Rows[i][0],idscreen=Model.Rows[i][1] }, null)</td>
+</tr>
+    }
+</table>
