@@ -142,7 +142,7 @@ namespace Networking_Project.Controllers
             if (Order_(ord))
             {
                 var check_occupied = db.OrdersTbl.FirstOrDefault(s => s.idScreen == ord.idScreen &&
-                s.Chair == ord.Chair&&ord.Pay==true);
+                s.Chair == ord.Chair&&s.Pay==true);
 
                 if (check_occupied == null && ord.Chair >= 1 && ord.Chair <= movie.NumberSeats
                    )
@@ -291,7 +291,7 @@ namespace Networking_Project.Controllers
             OrdersTbl ord_old = db.OrdersTbl.Find(id);
             OrdersTbl ord_ = new OrdersTbl
             {
-                //idOrder = ord.idOrder,
+                //idOrder = ord_old.idOrder,
                 idUser = ord_old.idUser,
                 idScreen = ord_old.idScreen,
                 Chair = ord_old.Chair,
@@ -303,13 +303,21 @@ namespace Networking_Project.Controllers
             };
             if (ModelState.IsValid)
             {
+                var cheak_occ = db.OrdersTbl.FirstOrDefault(s => s.idScreen == ord_old.idScreen && s.Pay == true);
+                if(cheak_occ!=null)
+                {
+                    MessageBox.Show("Not invalid!! the ticket out of stock!!");
+                    return RedirectToAction("Index");
+                }
                 //OrdersTbl ordd = db.OrdersTbl.Find(id);
                 db.OrdersTbl.Remove(ord_old);   
                 db.OrdersTbl.Add(ord_);
                 db.SaveChanges();
-                var order_check = db.OrdersTbl.Where(x => x.idScreen==ord_.idScreen&&x.Chair==ord_.Chair).FirstOrDefault();
+                //CHECK IF THE ISCREEN WITH CHAIR=CHAIR FIND IN DB
+                var order_check = db.OrdersTbl.Where(x => x.idScreen==ord_.idScreen&&x.Chair==ord_.Chair&&x.Pay==false).FirstOrDefault();
                 if(order_check!=null)
                 {
+                   
                     OrdersTbl ord_new = new OrdersTbl
                     {
                         //idOrder = order_check.idOrder,
@@ -340,9 +348,6 @@ namespace Networking_Project.Controllers
             }
            
         }
-        public ActionResult Chat()
-        {
-            return View();
-        }
+       
     }
 }

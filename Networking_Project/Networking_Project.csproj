@@ -253,7 +253,6 @@
     <Content Include="Views\Guest\Index.cshtml" />
     <Content Include="Views\Guest\PayMent.cshtml" />
     <Content Include="Views\Users\editOrder.cshtml" />
-    <Content Include="Views\Users\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
